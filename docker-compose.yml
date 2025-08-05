@@ -1,22 +1,22 @@
-services:
-  postgres:
+version: '3' 
+services: 
+  postgres: 
     image: postgres:15
-    ports:
+    container_name: postgresdb
+    ports: 
       - 5432:5432
-    environment:
+    environment: 
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: postgres
-    volumes:
+    volumes: 
       - postgres_data:/var/lib/postgresql/data
-  airflow:
-    image: apache/airflow:2.10.0-python3.10
-    ports:
-      - 8080:8080
-    environment:
-      AIRFLOW__CORE__EXECUTOR: LocalExecutor
-      AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
-      AIRFLOW__CORE__LOAD_DEFAULT_CONNECTIONS: 'false'
-      AIRFLOW__CORE__DEFAULT_TIMEZONE: 'Asia/Kolkata'
+    networks: 
+      - airflow-network
+  
+networks: 
+  airflow-network: 
+    external: false
 
-      
+volumes: 
+  postgres_data: 
