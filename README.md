@@ -20,3 +20,10 @@ This project implements an ETL (Extract, Transform, Load) pipeline that integrat
 - All services (Airflow, PostgreSQL) run in Docker containers for easy setup and deployment.
 
 This setup allows for automated, repeatable data ingestion from the NASA APOD API into a robust database, with monitoring and scheduling handled by Airflow.
+
+## Screenshots for implementation 
+
+![](./image.png)
+
+![](./image_2.png)
+
