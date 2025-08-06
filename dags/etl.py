@@ -2,15 +2,15 @@ from airflow import DAG
 from airflow.providers.http.operators.http import HttpOperator
 from airflow.decorators import task
 from airflow.providers.postgres.hooks.postgres import PostgresHook
-from airflow.utils.dates import days_ago
+from datetime import datetime, timedelta
 import json 
 
 
 ## Defining the DAG 
 with DAG( 
     dag_id = "nasa_postges", 
-    start_date = days_ago(1), 
-    schedule_interval = "@daily", 
+    start_date = datetime.now() - timedelta(days=1),
+    schedule = "@daily", 
     catchup = False,  
 ) as dag: 
 
@@ -70,7 +70,7 @@ with DAG(
 
 
     ### Verify the data DBViewer 
-    verify_data = PostgresOperator( 
+    verify_data = PostgresHook( 
         task_id = "verify_data", 
         postgres_conn_id = "postgres_conn", 
         sql = "SELECT * FROM apod", 
